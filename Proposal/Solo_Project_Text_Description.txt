@@ -1,0 +1,15 @@
+My solo project will be a of an e-commerce site for a single product and make use of WebGL to display a 3D model
+of the object and allow for customizations to a purchase. This will be accomplished by use of the Sketchfab API (MVP)
+or Three.js (product backlog).
+
+The site will also include a customer database with login and registration for tracking customer shipping and payment info using Django/Python (MVP),
+with possible inclusion of the Square API (product backlog).
+
+MVP:
+- E-commerce site for single product displayed using Sketchfab API (javascript) for customizations and viewing
+- Login/Registration and pseudo-payment processing using Django/Python
+
+Product Backlog:
+- Use of Three.js for product WebGL display and customization
+- User of Square API (python) for login/registration/payment processing
+
