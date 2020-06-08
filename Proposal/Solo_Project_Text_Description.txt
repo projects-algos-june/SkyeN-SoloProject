@@ -13,3 +13,5 @@ Product Backlog:
 - Use of Three.js for product WebGL display and customization
 - User of Square API (python) for login/registration/payment processing
 
+My project will be most similar to the Pizza Time example project, but with the details above.
+
