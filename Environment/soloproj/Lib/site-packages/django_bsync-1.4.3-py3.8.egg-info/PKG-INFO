@@ -1,0 +1,67 @@
+Metadata-Version: 1.1
+Name: django-bsync
+Version: 1.4.3
+Summary: browser-sync with the Django development server
+Home-page: https://bitbucket.com/fingul/django-bsync
+Author: fingul
+Author-email: fingul@gmail.com
+License: BSD License
+Description: =================
+        Django-bsync
+        =================
+        
+        Forked from Django-livereload
+        
+        Application performing a `browser-sync`_ once the development
+        server is ready.
+        
+        Why this project ?
+        ------------------
+        
+        I recently started using `Gulp`_ and `browser-sync`_ to automatize some
+        tasks. Everytime an HTML, CSS or JS file changes, a bsync is performed in
+        the browser to reflect those changes, and I was pretty happy with that.
+        
+        But I found one limitation, I cannot perform a bsync of the current
+        page when editing Python files because the development server provided by
+        Django is not necessary ready as soon as the bsync request is emitted.
+        
+        That's why I created this application.
+        
+        Installation
+        ------------
+        
+        * First install the package on your system: ::
+        
+          $ pip install django-bsync
+        
+        * Then register the ``'bsync'`` application in your ``INSTALLED_APPS``
+          setting, before the ``'django.contrib.staticfiles'`` application if used.
+        
+        Usage
+        -----
+        
+        Install `browser-sync` globally ::
+        
+         $ npm install -g browser-sync
+        
+        If the bsync server provided by `browser-sync` is launched (via `Gulp`_,
+        `Grunt`_ or whatever), the ``runserver`` command will do a browser-sync reload on
+        your browser whenever the Django development server is ready.
+        
+        
+        .. _`browser-sync`: http://www.browsersync.io/
+        .. _`Gulp`: http://gulpjs.com/
+        .. _`Grunt`: http://gruntjs.com/
+        
+        
+Keywords: django,server,runserver,browser-sync
+Platform: UNKNOWN
+Classifier: Framework :: Django
+Classifier: Environment :: Web Environment
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

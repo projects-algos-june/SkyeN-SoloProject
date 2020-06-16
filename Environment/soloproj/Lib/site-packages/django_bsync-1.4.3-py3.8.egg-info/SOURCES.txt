@@ -1,0 +1,14 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+bsync/__init__.py
+bsync/management/__init__.py
+bsync/management/commands/__init__.py
+bsync/management/commands/runserver.py
+django_bsync.egg-info/PKG-INFO
+django_bsync.egg-info/SOURCES.txt
+django_bsync.egg-info/dependency_links.txt
+django_bsync.egg-info/pbr.json
+django_bsync.egg-info/top_level.txt

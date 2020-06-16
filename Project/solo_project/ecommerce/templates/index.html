@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>DaoTek Knives</title>
+        <meta name="description" content="DaoTek Knives provides top quality pocket knives at low cost.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+        <link rel="stylesheet" href="static/css/local.css"/>
+        <script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.4.2.js"></script>
+        <script type="text/javascript"  src="static/js/SketchfabAPIUtility.js"></script>
+    </head>
+    <body class="bg-light-gray">
+        <div class="sans-serif relative">
+            <div class="w-100 pa2 bg-light-blue shadow-3 h-auto fixed db z-9999">
+                <div class="fl dib">
+                    <img src="static/img/DaoTekLogo.png" class="h2 pa1 v-mid dib mt1">
+                    <img src="static/img/DaoTekWordLogo.png" class="h1 pa1 v-mid dib mt1">
+                </div>
+                <div class="fr dib">
+                    {% if request.session.userid %}
+                        <a class="link grow br3 ph3 pv2 v-mid dib white bg-blue mt2" href="account">Account</a>
+                        <a class="link grow br3 ph3 pv2 v-mid dib white bg-blue mt2" href="logout">Logout</a>
+                    {% else %}
+                        <a class="link grow br3 ph3 pv2 v-mid dib white bg-blue mt2" href="logreg">Login/Register</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="dib w-100 relative">
+                <iframe src="" id="api-frame" class="clip-polygon mt2 pa1 vh-75 fl w-60 dib" frameBorder="0" allow="autoplay" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                <script>
+                    function onSketchfabUtilityReady(){
+                       sketchfabAPIUtilityInstance.removeEventListener(sketchfabAPIUtilityInstance.EVENT_INITIALIZED, onSketchfabUtilityReady);
+                        document.getElementById("bluebutton").onclick = function() {blue()};
+                        document.getElementById("redbutton").onclick = function() {red()};
+                        document.getElementById("greenbutton").onclick = function() {green()};
+                        document.getElementById("purplebutton").onclick = function() {purple()};
+                        document.getElementById("yellowbutton").onclick = function() {yellow()};
+                        document.getElementById("pinkbutton").onclick = function() {pink()};
+                       function blue(){
+                            colorString = "#47AAFF";
+                            sketchfabAPIUtilityInstance.setColor("Handle",sketchfabAPIUtilityInstance.AlbedoPBR,null,colorString);
+                        };
+                        function red(){
+                            colorString = "#AB0707";
+                            sketchfabAPIUtilityInstance.setColor("Handle",sketchfabAPIUtilityInstance.AlbedoPBR,null,colorString);
+                        };
+                        function green(){
+                            colorString = "#338644";
+                            sketchfabAPIUtilityInstance.setColor("Handle",sketchfabAPIUtilityInstance.AlbedoPBR,null,colorString);
+                        };
+                        function purple(){
+                            colorString = "#663DAF";
+                            sketchfabAPIUtilityInstance.setColor("Handle",sketchfabAPIUtilityInstance.AlbedoPBR,null,colorString);
+                        };
+                        function yellow(){
+                            colorString = "#C6C434";
+                            sketchfabAPIUtilityInstance.setColor("Handle",sketchfabAPIUtilityInstance.AlbedoPBR,null,colorString);
+                        };
+                        function pink(){
+                            colorString = "#DA6ECF";
+                            sketchfabAPIUtilityInstance.setColor("Handle",sketchfabAPIUtilityInstance.AlbedoPBR,null,colorString);
+                        };
+                    };
+                    var sketchfabAPIUtilityInstance = new SketchfabAPIUtility("81c01ea01ff74b97b03e40db979be2c7", document.getElementById("api-frame"), {"autostart": 1,"transparent": 1,"camera": 0,"scrollwheel": 0,"doubleclick": 0,"ui_stop": 0,"preload": 1 });
+                    sketchfabAPIUtilityInstance.addEventListener(sketchfabAPIUtilityInstance.EVENT_INITIALIZED, onSketchfabUtilityReady);
+                    sketchfabAPIUtilityInstance.create();
+                 </script>
+                <div class="w-30 mt6 mr5 mb4 dib dark-gray bg-white pa3 shadow-3">
+                    <h2>DaoTek Utility Knife</h2>
+                    <form action="order" method="post">
+                    {% csrf_token %}
+                        <div>
+                            <p>The DaoTek Utility knife is now available for purchase! It comes in a variety of anodized aluminum handle colors with a durable carbon steel blade.</p>
+                            <p>Please select your handle color below to view and mark for purchase:</p>
+                            <div>
+                                <ul class="white">
+                                    <li class="di">
+                                    <input type="radio" id="blue" name="color" class="dn" checked="checked"/>
+                                    <label for="blue" id="bluebutton" onclick="blue()" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib light-gray bg-light-blue mt2 pointer">Blue</label>
+                                    </li>
+                                    <li class="di">
+                                    <input type="radio" id="red" name="color" class="dn"/>
+                                    <label for="red" id="redbutton" onclick="red()" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib light-gray bg-dark-red mt2 pointer">Red</label>
+                                    </li>
+                                    <li class="di">
+                                        <input type="radio" id="green" name="color" class="dn"/>
+                                        <label for="green" id="greenbutton" onclick="green()" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib light-gray bg-green mt2 pointer">Green</label>
+                                    </li>
+                                    <li class="di">
+                                        <input type="radio" id="purple" name="color" class="dn"/>
+                                        <label for="purple" id="purplebutton" onclick="purple()" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib light-gray bg-purple mt2 pointer">Purple</label>
+                                    </li>
+                                    <li class="di">
+                                        <input type="radio" id="yellow" name="color" class="dn"/>
+                                        <label for="yellow" id="yellowbutton" onclick="yellow()" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib light-gray bg-gold mt2 pointer">Yellow</label>
+                                    </li>
+                                    <li class="di">
+                                        <input type="radio" id="pink" name="color" class="dn"/>
+                                        <label for="pink" id="pinkbutton" onclick="pink()" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib light-gray bg-pink mt2 pointer">Pink</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h4 class="mb0 mt4 tr pr3">Price: $35.00</h4>
+                        </div>
+                        <button type="submit" name="order" class="bn shadow-5 link grow br3 tc fr pv2 mb1 mt3 dib light-gray bg-blue h-20 w-40 dib pointer">Order Now!</button>
+                    </form>
+                    <p class="red b v-mid">{{request.session.loginerror}}</p>
+                </div>
+                <footer class="mt1 db w-100 mid-gray tc">
+                    © 2035 <b class="ttu">DaoTek Ltd</b>., All Rights Reserved
+                    <p>Notice: This website is a portfolio project and is not selling an actual product.</p>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>

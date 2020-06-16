@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>DaoTek Login/Registration</title>
+        <meta name="description" content="Login or register for a DaoTek Knives account here!">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+        <link rel="stylesheet" href="static/css/local.css"/>
+        <script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.4.2.js"></script>
+        <script type="text/javascript"  src="static/js/SketchfabAPIUtility.js"></script>
+    </head>
+    <body class="bg-light-gray">
+        <div class="sans-serif relative">
+            <div class="w-100 pa2 bg-light-blue shadow-3 h-auto fixed db z-9999">
+                <div class="fl dib">
+                    <img src="static/img/DaoTekLogo.png" class="h2 pa1 v-mid dib mt1">
+                    <img src="static/img/DaoTekWordLogo.png" class="h1 pa1 v-mid dib mt1">
+                </div>
+                <div class="fr dib">
+                    <a class="link grow br3 ph3 pv2 v-mid dib white bg-blue mt2" href="/">Home</a>
+                </div>
+            </div>
+            <div class="dib w-100 relative mt5"></div>
+                <div id="green db">
+                    {% if request.session.success %}
+                    <p>You have successfully registered. Please log in.</p>
+                    {% endif %}
+                </div>
+                <div class="bg-white shadow-3 dib ma3 ml6 pa4 pl5 pr5 v-top pb5">
+                    <h3>Register</h3>
+                    <form action="register" method="post">
+                        {% csrf_token %}
+                        <p >
+                            <p class="di mr2">First Name: </p><input class="ml3 fr" name="first_name" type="text">
+                        </p>
+                        <p >
+                            <p class="di mr2">Last Name: </p><input class="ml3 fr" name="last_name" type="text">
+                        </p>
+                        <p >
+                            <p class="di mr2">Email: </p><input class="ml3 fr" name="email" type="text">
+                        </p>
+                        <p >
+                            <p class="di mr2">Password: </p><input class="ml3 fr" name="password" type="password">
+                        </p>
+                        <p >
+                            <p class="di mr2">Confirm PW: </p><input class="ml3 fr" name="confirmpw" type="password">
+                        </p>
+                        <button type="submit" class="bn link grow shadow-5 br3 ph3 pv2 v-mid dib white bg-blue mt2">Register</button>
+                    </form>
+                </div>
+                <div class="bg-white shadow-3 dib ma3 ml6 pa4 pl5 pr5 v-top pb5">
+                    <h3>Login</h3>
+                    <form action="login" method="post">
+                        {% csrf_token %}
+                        <p >
+                            <p class="di mr2">Email: </p><input class="ml3 fr" name="email" type="text">
+                        </p>
+                        <p >
+                            <p class="di mr2">Password: </p><input class="ml3 fr" name="password" type="password">
+                        </p>
+                        <button type="submit" class="bn link grow shadow-5 br3 ph3 pv2 v-mid dib white bg-blue mt2">Login</button>
+                    </form>
+                </div>
+                {% if messages %}
+                <div id="errors">
+                    <ul class="red db">    
+                        {% for message in messages %}    
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                <footer class="mt1 db w-100 mid-gray tc">
+                    © 2035 <b class="ttu">DaoTek Ltd</b>., All Rights Reserved
+                    <p>Notice: This website is a portfolio project and is not selling an actual product.</p>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>
