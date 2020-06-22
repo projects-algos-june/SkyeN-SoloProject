@@ -117,6 +117,8 @@ def order(request):
     else:
         if request.method == "POST":
             request.session['color'] = request.POST['color']
+            request.session['quantity'] = request.POST['quantity']
+            request.session['price'] = request.POST['price']
             return redirect("/checkout")
         else:
             return redirect("/")

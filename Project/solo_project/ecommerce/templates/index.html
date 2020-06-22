@@ -14,8 +14,8 @@
         <div class="sans-serif relative">
             <div class="w-100 pa2 bg-light-blue shadow-3 h-auto fixed db z-9999">
                 <div class="fl dib">
-                    <img src="static/img/DaoTekLogo.png" class="h2 pa1 v-mid dib mt1">
-                    <img src="static/img/DaoTekWordLogo.png" class="h1 pa1 v-mid dib mt1">
+                    <a href="/"><img src="static/img/DaoTekLogo.png" class="h2 pa1 v-mid dib mt1" alt="DaoTek Graphical Logo, Click to Go Home" title="Click to go home"></a>
+                    <a href="/"><img src="static/img/DaoTekWordLogo.png" class="h1 pa1 v-mid dib mt1" alt="DaoTek Text Logo, Click to Go Home" title="Click to go home"></a>
                 </div>
                 <div class="fr dib">
                     {% if request.session.userid %}
@@ -65,6 +65,30 @@
                     var sketchfabAPIUtilityInstance = new SketchfabAPIUtility("81c01ea01ff74b97b03e40db979be2c7", document.getElementById("api-frame"), {"autostart": 1,"transparent": 1,"camera": 0,"scrollwheel": 0,"doubleclick": 0,"ui_stop": 0,"preload": 1 });
                     sketchfabAPIUtilityInstance.addEventListener(sketchfabAPIUtilityInstance.EVENT_INITIALIZED, onSketchfabUtilityReady);
                     sketchfabAPIUtilityInstance.create();
+                    
+                    function updateprice(){
+                        let x = document.getElementById("qtySelect").value;
+                        if (x == "1"){
+                            document.getElementById("priceShown").innerHTML = "35.00";
+                            document.getElementById('price').value = "35.00";
+                        }
+                        if (x == "2"){
+                            document.getElementById("priceShown").innerHTML = "70.00";
+                            document.getElementById('price').value = "70.00";
+                        }
+                        if (x == "3"){
+                            document.getElementById("priceShown").innerHTML = "105.00";
+                            document.getElementById('price').value = "105.00";
+                        }
+                        if (x == "4"){
+                            document.getElementById("priceShown").innerHTML = "140.00";
+                            document.getElementById('price').value = "140.00";
+                        }
+                        if (x == "5"){
+                            document.getElementById("priceShown").innerHTML = "175.00";
+                            document.getElementById('price').value = "175.00";
+                        }
+                    };
                  </script>
                 <div class="w-30 mt6 mr5 mb4 dib dark-gray bg-white pa3 shadow-3">
                     <h2>DaoTek Utility Knife</h2>
@@ -76,40 +100,49 @@
                             <div>
                                 <ul class="white">
                                     <li class="di">
-                                    <input type="radio" id="blue" name="color" class="dn" checked="checked"/>
+                                    <input type="radio" id="blue" value="Blue" name="color" class="dn" checked>
                                     <label for="blue" id="bluebutton" onclick="blue()" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib light-gray bg-light-blue mt2 pointer">Blue</label>
                                     </li>
                                     <li class="di">
-                                    <input type="radio" id="red" name="color" class="dn"/>
+                                    <input type="radio" id="red" value="Red" name="color" class="dn">
                                     <label for="red" id="redbutton" onclick="red()" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib light-gray bg-dark-red mt2 pointer">Red</label>
                                     </li>
                                     <li class="di">
-                                        <input type="radio" id="green" name="color" class="dn"/>
+                                        <input type="radio" id="green" value="Green" name="color" class="dn">
                                         <label for="green" id="greenbutton" onclick="green()" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib light-gray bg-green mt2 pointer">Green</label>
                                     </li>
                                     <li class="di">
-                                        <input type="radio" id="purple" name="color" class="dn"/>
+                                        <input type="radio" id="purple" value="Purple" name="color" class="dn">
                                         <label for="purple" id="purplebutton" onclick="purple()" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib light-gray bg-purple mt2 pointer">Purple</label>
                                     </li>
                                     <li class="di">
-                                        <input type="radio" id="yellow" name="color" class="dn"/>
+                                        <input type="radio" id="yellow" value="Yellow" name="color" class="dn">
                                         <label for="yellow" id="yellowbutton" onclick="yellow()" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib light-gray bg-gold mt2 pointer">Yellow</label>
                                     </li>
                                     <li class="di">
-                                        <input type="radio" id="pink" name="color" class="dn"/>
+                                        <input type="radio" id="pink" value="Pink" name="color" class="dn">
                                         <label for="pink" id="pinkbutton" onclick="pink()" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib light-gray bg-pink mt2 pointer">Pink</label>
                                     </li>
                                 </ul>
+                            <label for="quantity" class="b dib mt4 ml6 pl3">Quantity:</label>
+                            <select name="quantity" onchange="updateprice()" id="qtySelect" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib white ml5 pointer bg-blue">
+                                <option class= "white bg-blue" value="1" selected>1</option>
+                                <option class= "white bg-blue" value="2">2</option>
+                                <option class= "white bg-blue" value="3">3</option>
+                                <option class= "white bg-blue" value="4">4</option>
+                                <option class= "white bg-blue" value="5">5</option>
+                            </select>
                             </div>
-                            <h4 class="mb0 mt4 tr pr3">Price: $35.00</h4>
+                            <h4 class="mb0 mt4 tr pr3">Subtotal: $<span id="priceShown">35.00</span></h4>
+                            <input id="price" name="price" type="hidden" value="35.00">
                         </div>
                         <button type="submit" name="order" class="bn shadow-5 link grow br3 tc fr pv2 mb1 mt3 dib light-gray bg-blue h-20 w-40 dib pointer">Order Now!</button>
                     </form>
                     <p class="red b v-mid">{{request.session.loginerror}}</p>
                 </div>
                 <footer class="mt1 db w-100 mid-gray tc">
-                    © 2035 <b class="ttu">DaoTek Ltd</b>., All Rights Reserved
-                    <p>Notice: This website is a portfolio project and is not selling an actual product.</p>
+                    <p class="mb0">© 2035 <b class="tc ttu">DaoTek Ltd</b>., All Rights Reserved</p>
+                    <p class="mb0">Notice: This website is a portfolio project and is not selling any actual products.</p>
                 </footer>
             </div>
         </div>

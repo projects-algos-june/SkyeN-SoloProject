@@ -9,13 +9,36 @@
         <link rel="stylesheet" href="static/css/local.css"/>
         <script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.4.2.js"></script>
         <script type="text/javascript"  src="static/js/SketchfabAPIUtility.js"></script>
+        <script>
+            function update(){
+                let x = document.getElementById("colorSelect").value;
+                if (x == "Blue"){
+                    document.getElementById('colorSelect').className = "bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib white ml5 pointer bg-light-blue";
+                }
+                else if (x == "Red"){
+                    document.getElementById('colorSelect').className = "bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib white ml5 pointer bg-dark-red"; 
+                }
+                else if (x == "Green"){
+                    document.getElementById('colorSelect').className = "bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib white ml5 pointer bg-green"; 
+                }
+                else if (x == "Purple"){
+                    document.getElementById('colorSelect').className = "bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib white ml5 pointer bg-purple"; 
+                }
+                else if (x == "Yellow"){
+                    document.getElementById('colorSelect').className = "bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib white ml5 pointer bg-gold"; 
+                }
+                else if (x == "Pink"){
+                    document.getElementById('colorSelect').className = "bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib white ml5 pointer bg-pink"; 
+                }
+            };
+        </script>
     </head>
     <body class="bg-light-gray">
         <div class="sans-serif relative">
             <div class="w-100 pa2 bg-light-blue shadow-3 h-auto fixed db z-9999">
                 <div class="fl dib">
-                    <img src="static/img/DaoTekLogo.png" class="h2 pa1 v-mid dib mt1">
-                    <img src="static/img/DaoTekWordLogo.png" class="h1 pa1 v-mid dib mt1">
+                    <a href="/"><img src="static/img/DaoTekLogo.png" class="h2 pa1 v-mid dib mt1" alt="DaoTek Graphical Logo, Click to Go Home" title="Click to go home"></a>
+                    <a href="/"><img src="static/img/DaoTekWordLogo.png" class="h1 pa1 v-mid dib mt1" alt="DaoTek Text Logo, Click to Go Home" title="Click to go home"></a>
                 </div>
                 <div class="fr dib">
                     {% if request.session.userid %}
@@ -28,17 +51,54 @@
             </div>
             <div class="pt6"></div>
                 <div class="mb5 mw5 mw7-ns center dark-gray bg-white pa3 ph5-ns shadow-3">
-                    <h2 class="db">Checkout</h2>
+                    <h2 class="db tc">Checkout</h2>
                     <div class="bt"></div>
-                    <p class="db">Please review the details below and add your shipping details to finalize your order.</p>
-                    <div class="bt"></div>
-                    <p class="dib">{{request.session.color}}</p>
+                    <p class="db tc">Please review the details below and add your shipping details to finalize your order.</p>
+                    <p class="db tc">Notice: DaoTek can only ship orders to the 50 United States.</p>
+                    <div class="bt mb3"></div>
+                    {% csrf_token %}
+                    <form action="finalize" method="post">
+                        <label for="color" class="b dib">Handle Color:</label>
+                        <select name="color" id="colorSelect" onchange="update()" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib white ml5 pointer {% if request.session.color == "Blue" %} bg-light-blue {% elif request.session.color == "Red" %} bg-dark-red {% elif request.session.color == "Green" %} bg-green {% elif request.session.color == "Purple" %} bg-purple {% elif request.session.color == "Yellow" %} bg-gold {% elif request.session.color == "Pink" %} bg-pink {% endif %}">
+                            <option class= "white bg-light-blue" value="Blue"{% if request.session.color == "Blue" %} selected {% endif %}>Blue</option>
+                            <option class= "white bg-dark-red" value="Red"{% if request.session.color == "Red" %} selected {% endif %}>Red</option>
+                            <option class= "white bg-green" value="Green"{% if request.session.color == "Green" %} selected {% endif %}>Green</option>
+                            <option class= "white bg-purple" value="Purple"{% if request.session.color == "Purple" %} selected {% endif %}>Purple</option>
+                            <option class= "white bg-gold" value="Yellow"{% if request.session.color == "Yellow" %} selected {% endif %}>Yellow</option>
+                            <option class="white bg-pink" value="Pink"{% if request.session.color == "Pink" %} selected {% endif %}>Pink</option>
+                        </select>
+                        <label for="quantity" class="b dib ml6">Quantity:</label>
+                        <select name="quantity" id="qtySelect" class="bn shadow-5 link grow br4 ph3 ml0 mr2 pv2 v-mid dib white ml5 pointer bg-blue">
+                            <option class= "white bg-blue" value="1"{% if request.session.quantity == "1" %} selected {% endif %}>1</option>
+                            <option class= "white bg-blue" value="2"{% if request.session.quantity == "2" %} selected {% endif %}>2</option>
+                            <option class= "white bg-blue" value="3"{% if request.session.quantity == "3" %} selected {% endif %}>3</option>
+                            <option class= "white bg-blue" value="4"{% if request.session.quantity == "4" %} selected {% endif %}>4</option>
+                            <option class= "white bg-blue" value="5"{% if request.session.quantity == "5" %} selected {% endif %}>5</option>
+                        </select>
+                        <div class="bt mb4 mt3"></div>
+                        <p >
+                            <p class="di mr2">Ship to (name): </p><input class="ml2 w-75 fr" name="shipname" type="text">
+                        </p>
+                        <p >
+                            <p class="di mr2">Address: </p><input class="ml2 w-75 fr" name="street" type="text">
+                        </p>
+                        <p >
+                            <p class="di mr2">City: </p><input class="ml2 w-75 fr" name="city" type="text">
+                        </p>
+                        <p >
+                            <p class="di mr2">State: </p><input class="ml2 w-75 fr" name="state" type="text">
+                        </p>
+                        <p >
+                            <p class="di mr2">Zip: </p><input class="ml2 w-75 fr" name="zipcode" type="text">
+                        </p>
+                        <div class="bt mb3 mt4"></div>
+                    </form>
                 </div>
             </div>
             <div class="dib w-100 relative">
                 <footer class="mt1 db w-100 mid-gray tc sans-serif">
-                    © 2035 <b class="ttu">DaoTek Ltd</b>., All Rights Reserved
-                    <p>Notice: This website is a portfolio project and is not selling an actual product.</p>
+                    <p class="mb0">© 2035 <b class="tc ttu">DaoTek Ltd</b>., All Rights Reserved</p>
+                    <p class="mb0">Notice: This website is a portfolio project and is not selling any actual products.</p>
                 </footer>
             </div>
         </div>

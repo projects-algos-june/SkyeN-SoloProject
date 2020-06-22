@@ -34,9 +34,11 @@ class User(models.Model):
 
 class Order(models.Model):
     color = models.CharField(max_length=6)
+    shipname = models.CharField(max_length=150)
     street = models.CharField(max_length=255)
-    city = models.CharField(max_length=50)
+    city = models.CharField(max_length=100)
     state = models.CharField(max_length=2)
+    zipcode = models.CharField(max_length=5)
     quantity = models.IntegerField()
     price = models.FloatField()
     ordered_by = models.ForeignKey(User, related_name="orders", on_delete = models.CASCADE)
